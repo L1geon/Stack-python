@@ -22,4 +22,22 @@ class Stack:
     def size(self):
         return len(self.stack)
 
+    def balanced(self):
+        open_list = ["[", "{", "("]
+        close_list = ["]", "}", ")"]
+        stack = []
+        for i in self.stack:
+            if i in open_list:
+                stack.append(i)
+            elif i in close_list:
+                ind = close_list.index(i)
+                if ((len(stack) > 0) and (open_list[ind] == stack[len(stack) - 1])):
+                    stack.pop()
+                else:
+                    return "Несбалансированно"
+        if len(stack) == 0:
+            return "Сбалансированно"
 
+
+d = Stack("{}{}")
+print(d.balanced())
